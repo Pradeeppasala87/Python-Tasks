@@ -406,6 +406,157 @@ plt.savefig("(S8)Transmission_vs_SellingPrice.png")
 
 plt.show()
 
+#===================================================================
+#Scenario 9
+#===================================================================
+
+
+# Count cars by Seller_Type
+seller_counts = df["Seller_Type"].value_counts()
+
+# Prepare labels and values
+labels = seller_counts.index
+values = seller_counts.values
+
+# Convert values into NumPy array
+values_array = np.array(values)
+
+# Print values
+print("Seller Types:", labels)
+print("Counts:", values_array)
+
+# Plot Bar Chart
+plt.figure(figsize=(6,5))
+plt.bar(labels, values_array)
+
+# Add labels and title
+plt.xlabel("Seller Type")
+plt.ylabel("Number of Cars")
+plt.title("Seller Type Analysis")
+
+# Save graph
+plt.savefig("seller_type_analysis.png")
+
+# Show graph
+plt.show()
+
+# Identify most common seller type
+most_common = seller_counts.idxmax()
+print(f"The most common seller type is: {most_common}")
+
+#======================================================================
+#Scenario 10
+#======================================================================
+
+# -------------------------------
+# Part 1: Feature Creation
+# -------------------------------
+
+# Create new column
+df["Price Difference"] = df["Present_Price"] - df["Selling_Price"]
+
+print("Dataset with Price Difference Column:\n")
+print(df.head())
+
+# -------------------------------
+# Part 2: NumPy Usage
+# -------------------------------
+
+# Convert Selling_Price into NumPy array
+selling_price_array = np.array(df["Selling_Price"])
+
+print("\nSelling Price NumPy Array:\n")
+print(selling_price_array)
+
+# Calculate price changes between consecutive rows
+price_changes = np.diff(selling_price_array)
+
+print("\nPrice Changes Between Consecutive Rows:\n")
+print(price_changes)
+
+# Convert Price Difference column into NumPy array
+price_diff_array = np.array(df["Price Difference"])
+
+# Calculate depreciation statistics
+average_depreciation = np.mean(price_diff_array)
+maximum_depreciation = np.max(price_diff_array)
+minimum_depreciation = np.min(price_diff_array)
+
+print("\nAverage Depreciation:", average_depreciation)
+print("Maximum Depreciation:", maximum_depreciation)
+print("Minimum Depreciation:", minimum_depreciation)
+
+# -------------------------------
+# Part 3: Visualizations
+# -------------------------------
+
+# 1. Line Graph - Selling Price Trend
+plt.figure(figsize=(10,5))
+plt.plot(df["Selling_Price"])
+plt.title("Selling Price Trend")
+plt.xlabel("Car Index")
+plt.ylabel("Selling Price")
+plt.savefig("selling_price_trend.png")
+plt.show()
+
+# 2. Bar Chart - Average Selling Price by Fuel Type
+fuel_avg = df.groupby("Fuel_Type")["Selling_Price"].mean()
+
+plt.figure(figsize=(7,5))
+plt.bar(fuel_avg.index, fuel_avg.values)
+plt.title("Average Selling Price by Fuel Type")
+plt.xlabel("Fuel Type")
+plt.ylabel("Average Selling Price")
+plt.savefig("fuel_type_avg_price.png")
+plt.show()
+
+# 3. Histogram - Selling Price Distribution
+plt.figure(figsize=(8,5))
+plt.hist(df["Selling_Price"], bins=10)
+plt.title("Distribution of Selling Prices")
+plt.xlabel("Selling Price")
+plt.ylabel("Frequency")
+plt.savefig("selling_price_distribution.png")
+plt.show()
+
+# -------------------------------
+# Part 4: Insights
+# -------------------------------
+
+# Highest average selling price by fuel type
+highest_fuel = fuel_avg.idxmax()
+
+# Average selling price by transmission type
+transmission_avg = df.groupby("Transmission")["Selling_Price"].mean()
+
+higher_transmission = transmission_avg.idxmax()
+
+print("\n----- Insights -----")
+
+print(f"\nFuel type with highest average selling price: {highest_fuel}")
+
+print(f"\nTransmission type with higher average selling price: {higher_transmission}")
+
+# Price concentration insight
+median_price = df["Selling_Price"].median()
+
+if median_price < df["Selling_Price"].mean():
+    print("\nMost cars are concentrated in lower selling prices.")
+else:
+    print("\nMost cars are concentrated in higher selling prices.")
+
+# Older cars vs selling price
+current_year = 2025
+df["Car_Age"] = current_year - df["Year"]
+
+correlation = df["Car_Age"].corr(df["Selling_Price"])
+
+print("\nCorrelation between Car Age and Selling Price:", correlation)
+
+if correlation < 0:
+    print("Older cars tend to have lower selling prices.")
+else:
+    print("Older cars do not necessarily have lower selling prices.")
 
 
 
