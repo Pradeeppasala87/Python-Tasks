@@ -144,4 +144,64 @@ model_lasso.fit(X_train, y_train)
 y_pred_lasso = model_lasso.predict(X_test)
 
 print("\n-------------------- Lasso Regression --------------------")
+
+# ============================================================
+# 8. BAGGING REGRESSOR
+# ============================================================
+
+from sklearn.ensemble import BaggingRegressor
+
+model_bag = BaggingRegressor()
+model_bag.fit(X_train, y_train)
+y_pred_bag = model_bag.predict(X_test)
+
+print("\n-------------------- Bagging --------------------")
+print("R2 Score:", r2_score(y_test, y_pred_bag))
+
+
+# ============================================================
+# 9. GRADIENT BOOSTING REGRESSOR
+# ============================================================
+
+from sklearn.ensemble import GradientBoostingRegressor
+
+model_gb = GradientBoostingRegressor()
+model_gb.fit(X_train, y_train)
+y_pred_gb = model_gb.predict(X_test)
+
+print("\n-------------------- Gradient Boosting --------------------")
+print("R2 Score:", r2_score(y_test, y_pred_gb))
+
+# ============================================================
+# 10. XGBOOST REGRESSOR
+# ============================================================
+
+from xgboost import XGBRegressor
+
+model_xgb = XGBRegressor()
+model_xgb.fit(X_train, y_train)
+y_pred_xgb = model_xgb.predict(X_test)
+
+print("\n-------------------- XGBoost --------------------")
+print("R2 Score:", r2_score(y_test, y_pred_xgb))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 print("R2 Score:", r2_score(y_test, y_pred_lasso))
