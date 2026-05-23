@@ -1,0 +1,83 @@
+/* Whole page */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* Main container */
+.container {
+    width: 500px;
+    margin: 50px auto;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px gray;
+}
+
+
+/* Heading */
+h1 {
+    text-align: center;
+    color: darkblue;
+}
+
+
+/* Input box */
+input[type="text"] {
+    width: 70%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+
+
+/* Buttons */
+button {
+    padding: 10px 15px;
+    background-color: darkblue;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+/* Button hover effect */
+button:hover {
+    background-color: blue;
+}
+
+
+/* Task list */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+
+/* Each task item */
+li {
+    background-color: #e8e8e8;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+
+/* Links */
+a {
+    text-decoration: none;
+    color: darkblue;
+    font-weight: bold;
+}
+
+
+/* Success message */
+p {
+    color: green;
+    text-align: center;
+}

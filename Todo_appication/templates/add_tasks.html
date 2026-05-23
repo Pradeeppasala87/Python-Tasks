@@ -1,0 +1,71 @@
+<!-- HTML Document -->
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <!-- Page Title -->
+    <title>Add Task</title>
+
+    <!-- Connect CSS -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <!-- Main Container -->
+    <div class="container">
+
+        <!-- Heading -->
+        <h1>Add Task</h1>
+
+        <!-- Form -->
+        <form method="POST">
+
+            <!-- Task Input Box -->
+            <input type="text"
+                   name="task"
+                   placeholder="Enter Task"
+                   required>
+
+            <!-- Submit Button -->
+            <button type="submit">
+
+                Enter
+
+            </button>
+
+        </form>
+
+        <br>
+
+        <!-- Show Success Message -->
+        {% if message %}
+
+            <p class="success">
+
+                {{ message }}
+
+            </p>
+
+        {% endif %}
+
+        <!-- Back To Home Page -->
+        <a href="/">
+
+            <button>
+
+                Back To Home
+
+            </button>
+
+        </a>
+
+    </div>
+
+</body>
+
+</html>

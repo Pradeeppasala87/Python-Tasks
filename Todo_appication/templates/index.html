@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Todo Home</title>
+</head>
+<body>
+
+<h1>Todo List</h1>
+
+<a href="/add">Add Task</a>
+
+<form method="GET">
+    <input type="text" name="search" placeholder="Search task">
+    <button type="submit">Search</button>
+</form>
+
+<ul>
+    {% for task in tasks %}
+        <li>{{ task }}</li>
+    {% endfor %}
+</ul>
+
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Edit Task</title>
+
+    <style>
+
+        body {
+
+            font-family: Arial;
+
+            background: #f4f4f4;
+
+            padding: 20px;
+        }
+
+        .container {
+
+            background: white;
+
+            width: 500px;
+
+            margin: auto;
+
+            padding: 20px;
+
+            border-radius: 10px;
+        }
+
+        input {
+
+            width: 100%;
+
+            padding: 12px;
+        }
+
+        button {
+
+            margin-top: 15px;
+
+            padding: 10px 15px;
+
+            background: orange;
+
+            color: white;
+
+            border: none;
+
+            cursor: pointer;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>✏️ Edit Task</h1>
+
+    <form method="POST">
+
+        <input
+
+            type="text"
+
+            name="task"
+
+            value="{{ task.title }}"
+
+            required
+
+        >
+
+        <button type="submit">
+
+            Update Task
+
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+
+</html>

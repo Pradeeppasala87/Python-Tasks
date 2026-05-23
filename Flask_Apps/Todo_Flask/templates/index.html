@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Todo Dashboard</title>
+
+    <style>
+
+        body {
+
+            font-family: Arial;
+
+            background: #f4f4f4;
+
+            padding: 20px;
+        }
+
+        .container {
+
+            background: white;
+
+            padding: 20px;
+
+            border-radius: 10px;
+
+            width: 800px;
+
+            margin: auto;
+        }
+
+        h1 {
+
+            text-align: center;
+        }
+
+        .top-bar {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+        }
+
+        .add-btn {
+
+            background: green;
+
+            color: white;
+
+            padding: 10px 15px;
+
+            text-decoration: none;
+
+            border-radius: 5px;
+        }
+
+        form {
+
+            margin-top: 20px;
+        }
+
+        input {
+
+            padding: 10px;
+
+            width: 70%;
+        }
+
+        button {
+
+            padding: 10px 15px;
+
+            background: royalblue;
+
+            color: white;
+
+            border: none;
+
+            cursor: pointer;
+        }
+
+        .task-card {
+
+            background: #fafafa;
+
+            padding: 15px;
+
+            margin-top: 15px;
+
+            border-radius: 8px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+        }
+
+        .buttons a {
+
+            text-decoration: none;
+
+            color: white;
+
+            padding: 8px 12px;
+
+            border-radius: 5px;
+
+            margin-left: 8px;
+        }
+
+        .complete-btn {
+
+            background: green;
+        }
+
+        .edit-btn {
+
+            background: orange;
+        }
+
+        .delete-btn {
+
+            background: red;
+        }
+
+        .completed {
+
+            color: green;
+        }
+
+        .pending {
+
+            color: red;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="top-bar">
+
+        <h1>📝 Todo Dashboard</h1>
+
+        <a href="/add" class="add-btn">
+            ➕ Add Task
+        </a>
+
+    </div>
+
+    <form method="GET">
+
+        <input
+
+            type="text"
+
+            name="search"
+
+            placeholder="Search task"
+
+        >
+
+        <button type="submit">
+
+            Search
+
+        </button>
+
+    </form>
+
+    <br>
+
+    <h3>Total Tasks : {{ tasks|length }}</h3>
+
+    {% if tasks %}
+
+        {% for task in tasks %}
+
+        <div class="task-card">
+
+            <div>
+
+                <h3>{{ task.title }}</h3>
+
+                {% if task.completed %}
+
+                    <p class="completed">
+                        ✅ Completed
+                    </p>
+
+                {% else %}
+
+                    <p class="pending">
+                        ❌ Pending
+                    </p>
+
+                {% endif %}
+
+            </div>
+
+            <div class="buttons">
+
+                <a
+
+                    href="/complete/{{ loop.index0 }}"
+
+                    class="complete-btn"
+
+                >
+
+                    Complete
+
+                </a>
+
+                <a
+
+                    href="/edit/{{ loop.index0 }}"
+
+                    class="edit-btn"
+
+                >
+
+                    Edit
+
+                </a>
+
+                <a
+
+                    href="/delete/{{ loop.index0 }}"
+
+                    class="delete-btn"
+
+                >
+
+                    Delete
+
+                </a>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <h2>No Tasks Available</h2>
+
+    {% endif %}
+
+</div>
+
+</body>
+
+</html>
