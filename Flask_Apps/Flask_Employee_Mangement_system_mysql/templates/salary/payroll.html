@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card" style="margin-top: 20px; border-top: 3px solid var(--primary-color);">
+    <h2 style="margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">
+        <span class="highlight">Payroll</span> & Compensation
+    </h2>
+
+    <table class="app-table">
+        <thead>
+            <tr>
+                <th>Record ID</th>
+                <th>Personnel Name</th>
+                <th>Base Salary</th>
+                <th>Bonus</th>
+                <th>Total Compensation</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for salary in salaries %}
+            <tr>
+                <td><span style="color: var(--primary-color);">PAY-{{ salary.id }}</span></td>
+                <td>
+                    {% for emp in employees %}
+                        {% if emp.id == salary.employee_id %}
+                            <strong style="color: white;">{{ emp.name }}</strong>
+                        {% endif %}
+                    {% endfor %}
+                </td>
+                <td>${{ "%.2f"|format(salary.salary) }}</td>
+                <td>${{ "%.2f"|format(salary.bonus) }}</td>
+                <td style="color: var(--success-color); font-weight: bold; font-size: 1.1rem;">
+                    ${{ "%.2f"|format(salary.salary + salary.bonus) }}
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="5" style="text-align: center; padding: 20px; color: #888;">No payroll records found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

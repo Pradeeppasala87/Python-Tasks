@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card" style="margin-top: 20px; border-top: 3px solid var(--primary-color);">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">
+        <h2><span class="highlight">Personnel</span> Roster</h2>
+        <a href="{{ url_for('add_employee') }}" class="btn btn-secondary"><i class="fa-solid fa-user-plus"></i> Register Personnel</a>
+    </div>
+
+    <table class="app-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Full Name</th>
+                <th>Designation</th>
+                <th>Contact</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for emp in employees %}
+            <tr>
+                <td>{{ emp.id }}</td>
+                <td><strong style="color: white;">{{ emp.name }}</strong></td>
+                <td><span class="badge badge-present">{{ emp.designation }}</span></td>
+                <td>{{ emp.email }}</td>
+                <td>
+                    <a href="{{ url_for('employee_profile', employee_id=emp.id) }}" class="btn btn-primary" style="padding: 4px 10px; font-size: 0.8rem;">Profile</a>
+                    <a href="{{ url_for('update_employee', employee_id=emp.id) }}" class="btn btn-secondary" style="padding: 4px 10px; font-size: 0.8rem; background-color: var(--warning-color); color: #000; border-color: var(--warning-color);">Update</a>
+                    <a href="{{ url_for('delete_employee', employee_id=emp.id) }}" class="btn btn-primary" style="padding: 4px 10px; font-size: 0.8rem; border-color: var(--danger-color); color: var(--danger-color);" onclick="return confirm('Confirm revocation of personnel access?');">Delete</a>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="5" style="text-align: center; padding: 20px; color: #888;">No personnel records found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

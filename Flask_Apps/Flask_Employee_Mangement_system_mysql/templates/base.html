@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header class="app-header">
+        <div class="header-container">
+            <div class="logo-section">
+                <i class="fa-solid fa-layer-group app-logo"></i>
+                <div class="titles">
+                    <h1><span class="highlight">EMS</span> Portal</h1>
+                </div>
+            </div>
+            {% if session.get('employee_name') %}
+            <div class="user-info">
+                <span><i class="fa-solid fa-user-astronaut"></i> {{ session.get('employee_name') }}</span>
+                <a href="{{ url_for('logout') }}" class="btn btn-primary" style="padding: 5px 15px; font-size: 0.8rem;">Logout</a>
+            </div>
+            {% endif %}
+        </div>
+    </header>
+
+    {% if session.get('employee_name') %}
+    <nav class="app-nav">
+        <ul>
+            <li><a href="{{ url_for('dashboard') }}"><i class="fa-solid fa-gauge-high"></i> <span class="highlight">Dashboard</span></a></li>
+            <li><a href="{{ url_for('employees') }}"><i class="fa-solid fa-users-viewfinder"></i> Personnel</a></li>
+            <li><a href="{{ url_for('attendance') }}"><i class="fa-solid fa-clock"></i> Attendance</a></li>
+            <li><a href="{{ url_for('payroll') }}"><i class="fa-solid fa-sack-dollar"></i> Compensation</a></li>
+            <li><a href="{{ url_for('analytics') }}"><i class="fa-solid fa-chart-network"></i> Analytics</a></li>
+        </ul>
+    </nav>
+    {% endif %}
+
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="app-footer">
+        <p>&copy; 2026 Nexus Systems.</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

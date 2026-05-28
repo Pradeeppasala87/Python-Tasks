@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card" style="margin-top: 20px; border-top: 3px solid var(--primary-color);">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">
+        <h2><span class="highlight">Attendance</span> Register</h2>
+        <form method="GET" action="{{ url_for('attendance') }}" style="display: flex; gap: 10px; align-items: center;">
+            <label for="selected_date" style="color: var(--primary-color); font-weight: bold;">Filter by Date:</label>
+            <input type="date" name="selected_date" id="selected_date" class="form-control" value="{{ selected_date or '' }}" style="width: auto;">
+            <button type="submit" class="btn btn-secondary" style="padding: 10px 15px;">Filter</button>
+        </form>
+    </div>
+
+    <div class="stats-grid" style="grid-template-columns: repeat(3, 1fr); margin-bottom: 30px;">
+        <div class="stat-card" style="border-bottom: 3px solid var(--success-color);">
+            <h3 style="color: var(--success-color);">{{ present_count }}</h3>
+            <p style="color: #aaa;">Present</p>
+        </div>
+        <div class="stat-card" style="border-bottom: 3px solid var(--danger-color);">
+            <h3 style="color: var(--danger-color);">{{ absent_count }}</h3>
+            <p style="color: #aaa;">Absent</p>
+        </div>
+        <div class="stat-card" style="border-bottom: 3px solid var(--warning-color);">
+            <h3 style="color: var(--warning-color);">{{ leave_count }}</h3>
+            <p style="color: #aaa;">On Leave</p>
+        </div>
+    </div>
+
+    <table class="app-table">
+        <thead>
+            <tr>
+                <th>Personnel Name</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Action (Right Click)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in attendance %}
+            <tr>
+                <td><strong style="color: white;">{{ record.employee_name }}</strong></td>
+                <td>{{ record.date }}</td>
+                <td>
+                    {% if record.status|lower == 'present' %}
+                    <span class="badge badge-present">Present</span>
+                    {% elif record.status|lower == 'absent' %}
+                    <span class="badge badge-absent">Absent</span>
+                    {% elif record.status|lower == 'leave' %}
+                    <span class="badge badge-leave">Leave</span>
+                    {% else %}
+                    <span class="badge" style="background-color: #333; color: #888;">Not Marked</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <button class="btn btn-primary attendance-btn" style="padding: 4px 10px; font-size: 0.85rem;">
+                        {% if record.status|lower == 'present' %}
+                            <i class="fa-solid fa-check"></i> Present Marked
+                        {% else %}
+                            <i class="fa-solid fa-clipboard-check"></i> Mark Present
+                        {% endif %}
+                    </button>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="4" style="text-align: center; padding: 20px; color: #888;">No attendance records found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

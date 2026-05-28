@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card" style="margin-top: 20px; border-top: 3px solid var(--primary-color);">
+    <h2 style="margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">
+        <span class="highlight">Organizational</span> Analytics
+    </h2>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+        <!-- Distribution by Department -->
+        <div style="background-color: #242424; padding: 20px; border-radius: 8px; border: 1px solid var(--border-color);">
+            <h4 style="margin-bottom: 15px; text-align: center; color: var(--highlight-text);">Personnel Distribution</h4>
+            <table class="app-table">
+                <thead>
+                    <tr>
+                        <th>Department</th>
+                        <th>Headcount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in range(department_labels|length) %}
+                    <tr>
+                        <td style="color: white;">{{ department_labels[i] }}</td>
+                        <td><span class="badge" style="background-color: var(--primary-color); color: #000;">{{ department_counts[i] }}</span></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Average Salary by Department -->
+        <div style="background-color: #242424; padding: 20px; border-radius: 8px; border: 1px solid var(--border-color);">
+            <h4 style="margin-bottom: 15px; text-align: center; color: var(--highlight-text);">Average Compensation</h4>
+            <table class="app-table">
+                <thead>
+                    <tr>
+                        <th>Department</th>
+                        <th>Average Salary</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in range(salary_labels|length) %}
+                    <tr>
+                        <td style="color: white;">{{ salary_labels[i] }}</td>
+                        <td style="color: var(--success-color); font-weight: bold;">${{ "%.2f"|format(salary_values[i]) }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div style="margin-top: 30px; background-color: #1a1a1a; padding: 20px; border-radius: 8px; border: 1px solid var(--border-color);">
+        <h4 style="margin-bottom: 20px; text-align: center; color: var(--highlight-text);">Today's <span class="highlight">Attendance</span> Pulse</h4>
+        <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 20px;">
+            <div style="text-align: center; padding: 15px; border-bottom: 2px solid var(--success-color);">
+                <p style="font-size: 2.5rem; color: var(--success-color); font-weight: bold; margin: 0; text-shadow: 0 0 10px rgba(0,230,118,0.3);">{{ present_count }}</p>
+                <p style="text-transform: uppercase; font-size: 0.85rem; color: #aaa; letter-spacing: 1px;">Present</p>
+            </div>
+            <div style="text-align: center; padding: 15px; border-bottom: 2px solid var(--danger-color);">
+                <p style="font-size: 2.5rem; color: var(--danger-color); font-weight: bold; margin: 0; text-shadow: 0 0 10px rgba(255,82,82,0.3);">{{ absent_count }}</p>
+                <p style="text-transform: uppercase; font-size: 0.85rem; color: #aaa; letter-spacing: 1px;">Absent</p>
+            </div>
+            <div style="text-align: center; padding: 15px; border-bottom: 2px solid var(--warning-color);">
+                <p style="font-size: 2.5rem; color: var(--warning-color); font-weight: bold; margin: 0; text-shadow: 0 0 10px rgba(255,215,64,0.3);">{{ leave_count }}</p>
+                <p style="text-transform: uppercase; font-size: 0.85rem; color: #aaa; letter-spacing: 1px;">On Leave</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

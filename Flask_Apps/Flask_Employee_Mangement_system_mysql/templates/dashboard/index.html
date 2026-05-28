@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card" style="margin-top: 20px; border-top: 3px solid var(--primary-color);">
+    <h2 style="margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">
+        <span class="highlight">System</span> Overview
+    </h2>
+    
+    <div class="stats-grid">
+        <div class="stat-card">
+            <i class="fa-solid fa-users"></i>
+            <h3>{{ employees|length }}</h3>
+            <p style="color: var(--primary-color);">Total Personnel</p>
+        </div>
+        <div class="stat-card">
+            <i class="fa-solid fa-building"></i>
+            <h3>{{ departments|length }}</h3>
+            <p style="color: var(--primary-color);">Active Departments</p>
+        </div>
+        <div class="stat-card">
+            <i class="fa-solid fa-calendar-check"></i>
+            <h3>{{ attendance|length }}</h3>
+            <p style="color: var(--primary-color);">Attendance Records</p>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <h3 style="margin-bottom: 15px;"><span class="highlight">Recent</span> Personnel</h3>
+    <table class="app-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Designation</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for emp in employees[:5] %}
+            <tr>
+                <td>{{ emp.id }}</td>
+                <td>{{ emp.name }}</td>
+                <td><span class="badge badge-leave">{{ emp.designation }}</span></td>
+                <td>
+                    <a href="{{ url_for('employee_profile', employee_id=emp.id) }}" class="btn btn-primary" style="padding: 4px 10px; font-size: 0.8rem;">View Profile</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

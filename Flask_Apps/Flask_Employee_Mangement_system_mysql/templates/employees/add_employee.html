@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card" style="max-width: 600px; margin: 20px auto;">
+    <h2 style="margin-bottom: 20px; border-bottom: 2px solid var(--border-color); padding-bottom: 10px;">
+        Register New Personnel
+    </h2>
+
+    <form method="POST" action="{{ url_for('add_employee') }}">
+        <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" name="name" id="name" class="form-control" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="age">Age</label>
+            <input type="number" name="age" id="age" class="form-control" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="email">Official Email</label>
+            <input type="email" name="email" id="email" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Contact Number</label>
+            <input type="text" name="phone" id="phone" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="designation">Designation / Title</label>
+            <input type="text" name="designation" id="designation" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="department_id">Department assignment</label>
+            <select name="department_id" id="department_id" class="form-control" required>
+                {% for dept in departments %}
+                <option value="{{ dept.id }}">{{ dept.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div style="margin-top: 25px; display: flex; gap: 10px;">
+            <button type="submit" class="btn btn-secondary anim-btn"><i class="fa-solid fa-save"></i> Submit Registration</button>
+            <a href="{{ url_for('employees') }}" class="btn btn-outline anim-btn" style="color: var(--primary-color); border-color: var(--border-color);">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

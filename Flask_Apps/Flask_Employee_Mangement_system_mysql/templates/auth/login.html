@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="login-wrapper">
+    <div class="card login-card">
+        <div class="login-header">
+            <i class="fa-solid fa-fingerprint"></i>
+            <h2 style="color: var(--text-color);">System Access</h2>
+            <p style="color: #888;">Authenticate to continue</p>
+        </div>
+
+        {% if error %}
+        <div class="badge badge-absent" style="display: block; margin-bottom: 20px; text-align: center; padding: 10px;">
+            {{ error }}
+        </div>
+        {% endif %}
+
+        <form method="POST" action="{{ url_for('login') }}">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <!-- Pre-filled for demo -->
+                <input type="text" name="username" id="username" class="form-control" value="admin" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <!-- Pre-filled for demo -->
+                <input type="password" name="password" id="password" class="form-control" value="admin" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 15px;">
+                <i class="fa-solid fa-unlock"></i> Login
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
