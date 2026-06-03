@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Prompt Bot</title>
+    <meta name="description" content="A premium interface for the System Prompt Bot.">
+    <!-- Link to the CSS file inside the static folder -->
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="glass-container">
+        <h1>System Prompt Bot</h1>
+        <div class="prompt-box">
+            <p>{{ prompt | replace('\n', '<br>') | safe }}</p>
+        </div>
+        <a href="/stats" class="btn">View Bot Stats</a>
+    </div>
+</body>
+</html>
